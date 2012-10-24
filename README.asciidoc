@@ -1,0 +1,5 @@
+== Arquillian Server Daemon
+
+A slim server daemon capable of executing test code as received via an Arquillian client.
+
+All contents of this repository licensed under http://www.apache.org/licenses/LICENSE-2.0.txt['Apache Licence 2.0']
