@@ -14,7 +14,7 @@
     <!-- Artifact Information  -->
   <groupId>org.jboss.arquillian.daemon</groupId>
   <artifactId>arquillian-daemon-parent</artifactId>
-  <version>1.0.0.Alpha1-SNAPSHOT</version>
+  <version>1.0.0.Alpha1</version>
   <packaging>pom</packaging>
   <name>Arquillian Daemon Aggregator and Build Parent</name>
   <url>http://www.arquillian.org</url>
