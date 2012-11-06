@@ -17,7 +17,6 @@
 package org.jboss.arquillian.daemon.protocol.arquillian;
 
 import java.util.Collection;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,8 +24,6 @@ import org.jboss.arquillian.container.test.spi.TestDeployment;
 import org.jboss.arquillian.container.test.spi.client.deployment.DeploymentPackager;
 import org.jboss.arquillian.container.test.spi.client.deployment.ProtocolArchiveProcessor;
 import org.jboss.shrinkwrap.api.Archive;
-import org.jboss.shrinkwrap.api.ArchivePath;
-import org.jboss.shrinkwrap.api.Node;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 
 /**
@@ -55,33 +52,7 @@ public enum DaemonDeploymentPackager implements DeploymentPackager {
             log.finest("Archive before additional packaging: " + archive.toString(true));
         }
         for (final Archive<?> auxArchive : testDeployment.getAuxiliaryArchives()) {
-
-            // TODO THIS IS BROKEN IN SHRINKWRAP, FIX IT SHRINKWRAP-431
-            // archive.merge(auxArchive);
-
-            // TODO This hack replaces the above.
-            final Map<ArchivePath, Node> content = auxArchive.getContent();
-            final Collection<ArchivePath> paths = content.keySet();
-            for (final ArchivePath path : paths) {
-                final Node current = archive.get(path);
-                final Node aux = content.get(path);
-                if (current != null) {
-                    if (current.getAsset() == null && aux.getAsset() == null) {
-                    } else if (current.getAsset() == null && aux.getAsset() != null) {
-                        throw new IllegalStateException("Current archive has dir and aux has " + aux.getAsset()
-                            + " at " + path);
-                    } else if (current.getAsset() != null && aux.getAsset() == null) {
-                        throw new IllegalStateException("Current archive has " + current.getAsset()
-                            + " and aux has dir at " + path);
-                    } else {
-                        archive.add(aux.getAsset(), path);
-                    }
-                } else {
-                    if (aux.getAsset() != null) {
-                        archive.add(aux.getAsset(), path);
-                    }
-                }
-            }
+            archive.merge(auxArchive);
         }
         if (log.isLoggable(Level.FINEST)) {
             log.finest("Archive after additional packaging: " + archive.toString(true));
