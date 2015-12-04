@@ -24,9 +24,8 @@
   <properties>
 
     <!-- Versioning -->
-    <version.org.jboss.arquillian.core>1.0.3.Final</version.org.jboss.arquillian.core>
-    <version.org.jboss.shrinkwrap>1.1.1-alpha-2</version.org.jboss.shrinkwrap>
-    <version.junit_junit>4.8.2</version.junit_junit>
+    <version.org.jboss.arquillian.core>1.1.10.Final</version.org.jboss.arquillian.core>
+    <version.junit_junit>4.12</version.junit_junit>
     <version.org.apache.maven.plugins_maven-site-plugin>3.0-beta-3</version.org.apache.maven.plugins_maven-site-plugin>
 
   </properties>
@@ -151,7 +150,6 @@
             <target>1.5</target>
           </compilerArguments>
           <argLine>-Xmx512M</argLine>
-          <executable>${JAVA_HOME}/bin/javac</executable>
         </configuration>
       </plugin>
 
@@ -196,14 +194,6 @@
             <requireJavaVersion>
               <version>1.7.0</version> <!-- Must be JDK7 -->
             </requireJavaVersion>
-            <requireProperty>
-              <property>env.JAVA_HOME</property>
-              <message>"JAVA_HOME needs to be set (to Java7)"</message>
-            </requireProperty>
-            <requireProperty>
-              <property>env.JAVA5_HOME</property>
-              <message>"JAVA5_HOME needs to be set to run some tests in the JRE5 runtime"</message>
-            </requireProperty>
           </rules>
         </configuration>
       </plugin>
@@ -227,25 +217,6 @@
         <version>${version.org.jboss.arquillian.core}</version>
         <type>pom</type>
         <scope>import</scope>
-      </dependency>
-      
-      <!-- SHRINKWRAP-430 needs to be manually included, remove when this version is in the ARQ BOM -->
-      <dependency>
-        <groupId>org.jboss.shrinkwrap</groupId>
-        <artifactId>shrinkwrap-api</artifactId>
-        <version>${version.org.jboss.shrinkwrap}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.jboss.shrinkwrap</groupId>
-        <artifactId>shrinkwrap-spi</artifactId>
-        <version>${version.org.jboss.shrinkwrap}</version>
-        <scope>provided</scope>
-      </dependency>
-      <dependency>
-        <groupId>org.jboss.shrinkwrap</groupId>
-        <artifactId>shrinkwrap-impl-base</artifactId>
-        <version>${version.org.jboss.shrinkwrap}</version>
-        <scope>provided</scope>
       </dependency>
       
       <dependency>
