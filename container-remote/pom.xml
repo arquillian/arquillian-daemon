@@ -3,7 +3,7 @@
   <parent>
     <groupId>org.jboss.arquillian.daemon</groupId>
     <artifactId>arquillian-daemon-parent</artifactId>
-    <version>1.0.0.Alpha2-SNAPSHOT</version>
+    <version>1.0.0.Alpha2</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
