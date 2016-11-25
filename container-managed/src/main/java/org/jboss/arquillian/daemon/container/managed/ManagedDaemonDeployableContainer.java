@@ -16,6 +16,11 @@
  */
 package org.jboss.arquillian.daemon.container.managed;
 
+import org.jboss.arquillian.container.spi.client.container.DeployableContainer;
+import org.jboss.arquillian.container.spi.client.container.LifecycleException;
+import org.jboss.arquillian.daemon.container.common.DaemonDeployableContainerBase;
+import org.jboss.arquillian.daemon.protocol.wire.WireProtocol;
+
 import java.io.File;
 import java.io.IOException;
 import java.lang.ProcessBuilder.Redirect;
@@ -26,11 +31,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import org.jboss.arquillian.container.spi.client.container.DeployableContainer;
-import org.jboss.arquillian.container.spi.client.container.LifecycleException;
-import org.jboss.arquillian.daemon.container.common.DaemonDeployableContainerBase;
-import org.jboss.arquillian.daemon.protocol.wire.WireProtocol;
 
 /**
  * {@link DeployableContainer} implementation for Managed Arquillian Server Daemon (handles start/stop of the server as
@@ -80,7 +80,7 @@ public class ManagedDaemonDeployableContainer extends
 
         // Build the launch command
         final File javaHome = new File(SecurityActions.getSystemProperty(SYSPROP_KEY_JAVA_HOME));
-        final List<String> command = new ArrayList<String>(10);
+        final List<String> command = new ArrayList<>(10);
         command.add(javaHome.getAbsolutePath() + "/bin/java");
         command.add("-jar");
         command.add(serverjarFile.getAbsolutePath());

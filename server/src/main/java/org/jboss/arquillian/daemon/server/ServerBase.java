@@ -73,7 +73,7 @@ public abstract class ServerBase implements Server {
 
         // Determine the ClassLoader to use in creating the SW Domain
         final ClassLoader thisCl = NettyServer.class.getClassLoader();
-        final Set<ClassLoader> classloaders = new HashSet<ClassLoader>(1);
+        final Set<ClassLoader> classloaders = new HashSet<>(1);
         classloaders.add(thisCl);
         if (log.isLoggable(Level.FINEST)) {
             log.finest("Using ClassLoader for ShrinkWrap Domain: " + thisCl);
@@ -82,7 +82,7 @@ public abstract class ServerBase implements Server {
 
         // Set
         this.bindAddress = bindAddress;
-        this.deployedArchives = new ConcurrentHashMap<String, GenericArchive>();
+        this.deployedArchives = new ConcurrentHashMap<>();
         this.shrinkwrapDomain = shrinkwrapDomain;
     }
 

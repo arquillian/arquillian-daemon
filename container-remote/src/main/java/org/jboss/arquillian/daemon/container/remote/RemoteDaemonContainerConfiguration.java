@@ -16,7 +16,6 @@
  */
 package org.jboss.arquillian.daemon.container.remote;
 
-import org.jboss.arquillian.container.spi.ConfigurationException;
 import org.jboss.arquillian.container.spi.client.container.ContainerConfiguration;
 import org.jboss.arquillian.daemon.container.common.DaemonContainerConfigurationBase;
 
@@ -27,15 +26,5 @@ import org.jboss.arquillian.daemon.container.common.DaemonContainerConfiguration
  */
 public class RemoteDaemonContainerConfiguration extends DaemonContainerConfigurationBase implements
     ContainerConfiguration {
-
-    /**
-     * {@inheritDoc}
-     *
-     * @see org.jboss.arquillian.container.spi.client.container.ContainerConfiguration#validate()
-     */
-    @Override
-    public void validate() throws ConfigurationException {
-        super.validate();
-    }
 
 }

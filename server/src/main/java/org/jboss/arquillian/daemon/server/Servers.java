@@ -29,8 +29,8 @@ public final class Servers {
 
     // These exposed as part of the API to help callers using reflection (for instance to avoid CCE if accessing the
     // server from a different ClassLoader)
-    public static String METHOD_NAME_CREATE = "create";
-    public static Class<?>[] METHOD_PARAMS_CREATE = new Class<?>[] { String.class, int.class };
+    public static final String METHOD_NAME_CREATE = "create";
+    public static final Class<?>[] METHOD_PARAMS_CREATE = new Class<?>[] { String.class, int.class };
 
     /**
      * No instances
