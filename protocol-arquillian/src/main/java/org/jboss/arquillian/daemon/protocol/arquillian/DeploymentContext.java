@@ -16,12 +16,12 @@
  */
 package org.jboss.arquillian.daemon.protocol.arquillian;
 
+import org.jboss.arquillian.container.spi.client.protocol.metadata.NamedContext;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
-
-import org.jboss.arquillian.container.spi.client.protocol.metadata.NamedContext;
 
 /**
  * {@link NamedContext} implementation backed by streams and reader/writer to interact with the Arquillian Server Daemon
@@ -78,9 +78,8 @@ public class DeploymentContext extends NamedContext {
         if (writer == null) {
             throw new IllegalArgumentException("writer must be specified");
         }
-        final DeploymentContext context = new DeploymentContext(deploymentName, socketInstream, socketOutstream,
+        return new DeploymentContext(deploymentName, socketInstream, socketOutstream,
             reader, writer);
-        return context;
     }
 
     /**

@@ -16,11 +16,11 @@
  */
 package org.jboss.arquillian.daemon.server;
 
+import org.junit.Test;
+
 import java.lang.reflect.Method;
 
-import junit.framework.Assert;
-
-import org.junit.Test;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * Tests to validate the reflection contracts of {@link Server} and {@link Servers}
@@ -32,19 +32,19 @@ public class ReflectionContractTest {
     @Test
     public void startMethod() throws NoSuchMethodException {
         final Method method = Server.class.getMethod(Server.METHOD_NAME_START, Server.METHOD_PARAMS_START);
-        Assert.assertNotNull(method);
+        assertNotNull(method);
     }
 
     @Test
     public void stopMethod() throws NoSuchMethodException {
         final Method method = Server.class.getMethod(Server.METHOD_NAME_STOP, Server.METHOD_PARAMS_STOP);
-        Assert.assertNotNull(method);
+        assertNotNull(method);
     }
 
     @Test
     public void createMethod() throws NoSuchMethodException {
         final Method method = Servers.class.getMethod(Servers.METHOD_NAME_CREATE, Servers.METHOD_PARAMS_CREATE);
-        Assert.assertNotNull(method);
+        assertNotNull(method);
     }
 
 }

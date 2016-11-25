@@ -221,8 +221,6 @@ final class NettyServer extends ServerBase implements Server {
                         objectOutstream.writeObject(testResult);
                         objectOutstream.flush();
                         ctx.flush();
-                        return;
-
                     } finally {
                         if (objectOutstream != null) {
                             objectOutstream.close();

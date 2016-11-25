@@ -16,6 +16,18 @@
  */
 package org.jboss.arquillian.daemon.container.common;
 
+import org.jboss.arquillian.container.spi.client.container.DeployableContainer;
+import org.jboss.arquillian.container.spi.client.container.DeploymentException;
+import org.jboss.arquillian.container.spi.client.container.LifecycleException;
+import org.jboss.arquillian.container.spi.client.protocol.ProtocolDescription;
+import org.jboss.arquillian.container.spi.client.protocol.metadata.ProtocolMetaData;
+import org.jboss.arquillian.daemon.protocol.arquillian.DaemonProtocol;
+import org.jboss.arquillian.daemon.protocol.arquillian.DeploymentContext;
+import org.jboss.arquillian.daemon.protocol.wire.WireProtocol;
+import org.jboss.shrinkwrap.api.Archive;
+import org.jboss.shrinkwrap.api.exporter.ZipExporter;
+import org.jboss.shrinkwrap.descriptor.api.Descriptor;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,18 +40,6 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import org.jboss.arquillian.container.spi.client.container.DeployableContainer;
-import org.jboss.arquillian.container.spi.client.container.DeploymentException;
-import org.jboss.arquillian.container.spi.client.container.LifecycleException;
-import org.jboss.arquillian.container.spi.client.protocol.ProtocolDescription;
-import org.jboss.arquillian.container.spi.client.protocol.metadata.ProtocolMetaData;
-import org.jboss.arquillian.daemon.protocol.arquillian.DaemonProtocol;
-import org.jboss.arquillian.daemon.protocol.arquillian.DeploymentContext;
-import org.jboss.arquillian.daemon.protocol.wire.WireProtocol;
-import org.jboss.shrinkwrap.api.Archive;
-import org.jboss.shrinkwrap.api.exporter.ZipExporter;
-import org.jboss.shrinkwrap.descriptor.api.Descriptor;
 
 /**
  * Base support for containers of the Arquillian Server Daemon
@@ -107,15 +107,11 @@ public abstract class DaemonDeployableContainerBase<CONFIGTYPE extends DaemonCon
             }
             assert socket != null : "Socket should have been connected";
             this.socket = socket;
-            final OutputStream socketOutstream = socket.getOutputStream();
-            this.socketOutstream = socketOutstream;
-            final PrintWriter writer = new PrintWriter(new OutputStreamWriter(socketOutstream, WireProtocol.CHARSET),
+            this.socketOutstream = socket.getOutputStream();
+            this.writer = new PrintWriter(new OutputStreamWriter(this.socketOutstream, WireProtocol.CHARSET),
                 true);
-            this.writer = writer;
-            final InputStream socketInstream = socket.getInputStream();
-            this.socketInstream = socketInstream;
-            final BufferedReader reader = new BufferedReader(new InputStreamReader(socketInstream));
-            this.reader = reader;
+            this.socketInstream = socket.getInputStream();
+            this.reader = new BufferedReader(new InputStreamReader(this.socketInstream));
         } catch (final IOException ioe) {
             this.closeRemoteResources();
             throw new LifecycleException("Could not open connection to remote process", ioe);
@@ -175,7 +171,7 @@ public abstract class DaemonDeployableContainerBase<CONFIGTYPE extends DaemonCon
             }
 
             // Set deployment name
-            final int startIndex = new String(WireProtocol.RESPONSE_OK_PREFIX + WireProtocol.COMMAND_DEPLOY_PREFIX)
+            final int startIndex = (WireProtocol.RESPONSE_OK_PREFIX + WireProtocol.COMMAND_DEPLOY_PREFIX)
                 .length();
             deploymentId = response.substring(startIndex);
             if (log.isLoggable(Level.FINER)) {

@@ -16,14 +16,14 @@
  */
 package org.jboss.arquillian.daemon.protocol.arquillian;
 
-import java.util.Collection;
-
 import org.jboss.arquillian.container.spi.client.protocol.ProtocolDescription;
 import org.jboss.arquillian.container.spi.client.protocol.metadata.ProtocolMetaData;
 import org.jboss.arquillian.container.test.spi.ContainerMethodExecutor;
 import org.jboss.arquillian.container.test.spi.client.deployment.DeploymentPackager;
 import org.jboss.arquillian.container.test.spi.client.protocol.Protocol;
 import org.jboss.arquillian.container.test.spi.command.CommandCallback;
+
+import java.util.Collection;
 
 /**
  * {@link Protocol} implementation for the Arquillian Server Daemon
@@ -72,8 +72,7 @@ public class DaemonProtocol implements Protocol<DaemonProtocolConfiguration> {
      *      org.jboss.arquillian.container.test.spi.command.CommandCallback)
      */
     @Override
-    public ContainerMethodExecutor getExecutor(final DaemonProtocolConfiguration protocolConfiguration,
-        final ProtocolMetaData metaData, final CommandCallback callback) {
+    public ContainerMethodExecutor getExecutor(final DaemonProtocolConfiguration protocolConfiguration, final ProtocolMetaData metaData, final CommandCallback callback) {
         final Collection<DeploymentContext> contexts = metaData.getContexts(DeploymentContext.class);
         assert contexts.size() == 1 : "Should be exactly one deployment context";
         final DeploymentContext context = contexts.iterator().next();

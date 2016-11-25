@@ -16,16 +16,16 @@
  */
 package org.jboss.arquillian.daemon.protocol.arquillian;
 
+import org.jboss.arquillian.container.test.spi.ContainerMethodExecutor;
+import org.jboss.arquillian.daemon.protocol.wire.WireProtocol;
+import org.jboss.arquillian.test.spi.TestMethodExecutor;
+import org.jboss.arquillian.test.spi.TestResult;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.PrintWriter;
 import java.util.logging.Logger;
-
-import org.jboss.arquillian.container.test.spi.ContainerMethodExecutor;
-import org.jboss.arquillian.daemon.protocol.wire.WireProtocol;
-import org.jboss.arquillian.test.spi.TestMethodExecutor;
-import org.jboss.arquillian.test.spi.TestResult;
 
 /**
  * {@link ContainerMethodExecutor} implementation which executes tests on the remote JVM Arquillian Server Daemon and

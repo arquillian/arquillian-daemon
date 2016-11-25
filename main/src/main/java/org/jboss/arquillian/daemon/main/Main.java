@@ -16,6 +16,13 @@
  */
 package org.jboss.arquillian.daemon.main;
 
+import org.jboss.arquillian.daemon.server.Server;
+import org.jboss.arquillian.daemon.server.Servers;
+import org.jboss.modules.Module;
+import org.jboss.modules.ModuleIdentifier;
+import org.jboss.modules.ModuleLoadException;
+import org.jboss.modules.ModuleLoader;
+
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -28,13 +35,6 @@ import java.security.ProtectionDomain;
 import java.util.Arrays;
 import java.util.jar.JarFile;
 import java.util.logging.Logger;
-
-import org.jboss.arquillian.daemon.server.Server;
-import org.jboss.arquillian.daemon.server.Servers;
-import org.jboss.modules.Module;
-import org.jboss.modules.ModuleIdentifier;
-import org.jboss.modules.ModuleLoadException;
-import org.jboss.modules.ModuleLoader;
 
 /**
  * Standalone process entry point for the Arquillian Server Daemon. Accepts two (optional) arguments:
@@ -176,7 +176,7 @@ public class Main {
         }));
     }
 
-    private static final String getDefaultValue(final String sysProp, final String suppliedValue) {
+    private static String getDefaultValue(final String sysProp, final String suppliedValue) {
         final String fromSysProp = SecurityActions.getSystemProperty(sysProp);
         return fromSysProp != null ? fromSysProp : suppliedValue;
     }

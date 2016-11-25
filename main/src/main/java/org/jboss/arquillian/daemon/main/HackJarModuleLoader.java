@@ -16,6 +16,13 @@
  */
 package org.jboss.arquillian.daemon.main;
 
+import org.jboss.modules.LocalModuleLoader;
+import org.jboss.modules.Module;
+import org.jboss.modules.ModuleIdentifier;
+import org.jboss.modules.ModuleLoadException;
+import org.jboss.modules.ModuleLoader;
+import org.jboss.modules.ModuleSpec;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -28,15 +35,8 @@ import java.util.UUID;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-import org.jboss.modules.LocalModuleLoader;
-import org.jboss.modules.Module;
-import org.jboss.modules.ModuleIdentifier;
-import org.jboss.modules.ModuleLoadException;
-import org.jboss.modules.ModuleLoader;
-import org.jboss.modules.ModuleSpec;
-
 /**
- * Hack implmentation of a {@link ModuleLoader} capable of loading modules contained in a JAR under a known module root.
+ * Hack implementation of a {@link ModuleLoader} capable of loading modules contained in a JAR under a known module root.
  * Explodes the module root into a temporary directory on the filesystem, by which a delegate {@link LocalModuleLoader}
  * may then load the modules. Temporarily necessary due to API restrictions in jboss-modules whereby the JarModuleLoader
  * is not accessible, nor is parsing a {@link ModuleSpec} from a <code>module.xml</code> file.

@@ -16,6 +16,12 @@
  */
 package org.jboss.arquillian.daemon.server;
 
+import org.jboss.shrinkwrap.api.ConfigurationBuilder;
+import org.jboss.shrinkwrap.api.Domain;
+import org.jboss.shrinkwrap.api.GenericArchive;
+import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.classloader.ShrinkWrapClassLoader;
+
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
@@ -35,12 +41,6 @@ import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
-
-import org.jboss.shrinkwrap.api.ConfigurationBuilder;
-import org.jboss.shrinkwrap.api.Domain;
-import org.jboss.shrinkwrap.api.GenericArchive;
-import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.classloader.ShrinkWrapClassLoader;
 
 /**
  * Base support for {@link Server} implementations
@@ -282,14 +282,9 @@ public abstract class ServerBase implements Server {
             final Object testRunner = getTestRunnerMethod.invoke(null, isolatedArchiveCL);
             final Class<?> testRunnerClass = testRunner.getClass();
             final Method executeMethod = testRunnerClass.getMethod(METHOD_NAME_EXECUTE, Class.class, String.class);
-            final Serializable testResult = (Serializable) executeMethod.invoke(testRunner, testClass, methodName);
-            return testResult;
-        } catch (final IllegalAccessException iae) {
+            return (Serializable) executeMethod.invoke(testRunner, testClass, methodName);
+        } catch (final IllegalAccessException | InvocationTargetException | NoSuchMethodException iae) {
             throw new RuntimeException(iae);
-        } catch (final InvocationTargetException ite) {
-            throw new RuntimeException(ite);
-        } catch (final NoSuchMethodException nsme) {
-            throw new RuntimeException(nsme);
         } finally {
             SecurityActions.setTccl(oldCl);
             try {
