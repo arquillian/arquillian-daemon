@@ -59,15 +59,7 @@ public class DaemonMethodExecutor implements ContainerMethodExecutor {
         assert testMethodExecutor != null : "Test method executor is required";
 
         // Build the String request according to the wire protocol
-        final StringBuilder builder = new StringBuilder();
-        builder.append(WireProtocol.COMMAND_TEST_PREFIX);
-        builder.append(context.getName());
-        builder.append(SPACE);
-        builder.append(testMethodExecutor.getInstance().getClass().getName());
-        builder.append(SPACE);
-        builder.append(testMethodExecutor.getMethod().getName());
-        builder.append(WireProtocol.COMMAND_EOF_DELIMITER);
-        final String testCommand = builder.toString();
+        final String testCommand = createTestCommand(testMethodExecutor);
         final PrintWriter writer = this.context.getWriter();
 
         // Request
@@ -87,6 +79,16 @@ public class DaemonMethodExecutor implements ContainerMethodExecutor {
         } catch (final ClassNotFoundException cnfe) {
             throw new RuntimeException("test result not on the client classpath", cnfe);
         }
+    }
+
+    private String createTestCommand(TestMethodExecutor testMethodExecutor) {
+        return WireProtocol.COMMAND_TEST_PREFIX +
+                context.getName() +
+                SPACE +
+                testMethodExecutor.getInstance().getClass().getName() +
+                SPACE +
+                testMethodExecutor.getMethod().getName() +
+                WireProtocol.COMMAND_EOF_DELIMITER;
     }
 
     /**
