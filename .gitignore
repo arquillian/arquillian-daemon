@@ -1,10 +1,34 @@
+# Eclipse
 .project
-.settings/
 .classpath
-target/
+.settings/
+
+# IntelliJ
 *.iml
 *.ipr
 *.iws
 .idea
-main/dependency-reduced-pom.xml
-server/dependency-reduced-pom.xml
+
+# Gradle
+.gradle/
+.ivy/
+
+# Maven
+target/
+dependency-reduced-pom.xml
+
+# TestNG
+test-output/
+
+# JBoss AS
+transaction.log
+
+# Infinitest configuration
+infinitest.filters
+
+# Logs
+*.log
+*.log~
+
+atlassian-ide-plugin.xml
+.autoenv.zsh
