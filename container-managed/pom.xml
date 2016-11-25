@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
     <groupId>org.jboss.arquillian.daemon</groupId>
     <artifactId>arquillian-daemon-parent</artifactId>
@@ -11,45 +12,45 @@
 
   <artifactId>arquillian-daemon-container-managed</artifactId>
   <name>Managed Container</name>
-  
+
   <dependencies>
-      <dependency>
-        <groupId>org.jboss.arquillian.daemon</groupId>
-        <artifactId>arquillian-daemon-container-common</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.jboss.arquillian.daemon</groupId>
-        <artifactId>arquillian-daemon-main</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.jboss.arquillian.daemon</groupId>
-        <artifactId>arquillian-daemon-protocol-arquillian</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.jboss.arquillian.daemon</groupId>
-        <artifactId>arquillian-daemon-protocol-wire</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.jboss.arquillian.daemon</groupId>
-        <artifactId>arquillian-daemon-server</artifactId>
-        <version>${project.version}</version>
-      </dependency> 
-      <dependency>
-        <groupId>org.jboss.arquillian.junit</groupId>
-        <artifactId>arquillian-junit-container</artifactId>
-        <!-- <scope>test</scope>   -->
-      </dependency>
-      <dependency>
-        <groupId>junit</groupId>
-        <artifactId>junit</artifactId>
-        <scope>test</scope>
-      </dependency>
+    <dependency>
+      <groupId>org.jboss.arquillian.daemon</groupId>
+      <artifactId>arquillian-daemon-container-common</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.arquillian.daemon</groupId>
+      <artifactId>arquillian-daemon-main</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.arquillian.daemon</groupId>
+      <artifactId>arquillian-daemon-protocol-arquillian</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.arquillian.daemon</groupId>
+      <artifactId>arquillian-daemon-protocol-wire</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.arquillian.daemon</groupId>
+      <artifactId>arquillian-daemon-server</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.arquillian.junit</groupId>
+      <artifactId>arquillian-junit-container</artifactId>
+      <!-- <scope>test</scope>   -->
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
-  
+
   <build>
     <plugins>
       <plugin>
@@ -90,12 +91,12 @@
               <goal>test</goal>
             </goals>
             <configuration>
-             <skip>false</skip>
+              <skip>false</skip>
             </configuration>
           </execution>
         </executions>
       </plugin>
     </plugins>
-   </build>
+  </build>
 
 </project>

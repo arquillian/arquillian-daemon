@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
     <groupId>org.jboss.arquillian.daemon</groupId>
     <artifactId>arquillian-daemon-parent</artifactId>
@@ -8,7 +9,7 @@
   </parent>
 
   <modelVersion>4.0.0</modelVersion>
-  
+
   <properties>
     <version.org.jboss.modules>1.1.3.GA</version.org.jboss.modules>
     <version.io.netty_netty>4.0.0.Alpha5</version.io.netty_netty>
@@ -16,7 +17,7 @@
 
   <artifactId>arquillian-daemon-server</artifactId>
   <name>Server Daemon</name>
-  
+
   <dependencies>
     <dependency>
       <groupId>org.jboss.arquillian.daemon</groupId>
@@ -49,9 +50,5 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-  
-  <build>
-
-   </build>
 
 </project>

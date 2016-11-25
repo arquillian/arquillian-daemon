@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
     <groupId>org.jboss.arquillian.daemon</groupId>
     <artifactId>arquillian-daemon-parent</artifactId>
@@ -8,7 +9,7 @@
   </parent>
 
   <modelVersion>4.0.0</modelVersion>
-  
+
   <properties>
     <version.org.jboss.modules>1.1.3.GA</version.org.jboss.modules>
     <version.io.netty_netty>4.0.0.Alpha5</version.io.netty_netty>
@@ -16,7 +17,7 @@
 
   <artifactId>arquillian-daemon-main</artifactId>
   <name>Main Client</name>
-  
+
   <dependencies>
     <dependency>
       <groupId>org.jboss.arquillian.daemon</groupId>
@@ -40,7 +41,7 @@
       <scope>provided</scope>
     </dependency>
   </dependencies>
-  
+
   <build>
     <plugins>
       <plugin>
@@ -63,7 +64,7 @@
                   <artifact>org.jboss.modules:jboss-modules</artifact>
                   <artifact>org.jboss.arquillian.daemon:arquillian-daemon-server</artifact>
                 </filter>
-              </filters> 
+              </filters>
             </configuration>
           </execution>
         </executions>
@@ -99,7 +100,9 @@
               <goal>copy</goal>
             </goals>
             <configuration>
-              <outputDirectory>${project.build.outputDirectory}/META-INF/modules/org/jboss/arquillian/daemon/server/main</outputDirectory>
+              <outputDirectory>
+                ${project.build.outputDirectory}/META-INF/modules/org/jboss/arquillian/daemon/server/main
+              </outputDirectory>
               <overWriteReleases>false</overWriteReleases>
               <overWriteSnapshots>false</overWriteSnapshots>
               <overWriteIfNewer>true</overWriteIfNewer>
@@ -119,7 +122,9 @@
               <goal>copy</goal>
             </goals>
             <configuration>
-              <outputDirectory>${project.build.outputDirectory}/META-INF/modules/org/jboss/arquillian/daemon/protocol/wire/main</outputDirectory>
+              <outputDirectory>
+                ${project.build.outputDirectory}/META-INF/modules/org/jboss/arquillian/daemon/protocol/wire/main
+              </outputDirectory>
               <overWriteReleases>false</overWriteReleases>
               <overWriteSnapshots>false</overWriteSnapshots>
               <overWriteIfNewer>true</overWriteIfNewer>
@@ -139,7 +144,8 @@
               <goal>copy</goal>
             </goals>
             <configuration>
-              <outputDirectory>${project.build.outputDirectory}/META-INF/modules/org/jboss/shrinkwrap/main</outputDirectory>
+              <outputDirectory>${project.build.outputDirectory}/META-INF/modules/org/jboss/shrinkwrap/main
+              </outputDirectory>
               <overWriteReleases>false</overWriteReleases>
               <overWriteSnapshots>false</overWriteSnapshots>
               <overWriteIfNewer>true</overWriteIfNewer>
@@ -163,12 +169,11 @@
         </executions>
       </plugin>
     </plugins>
-    
+
     <pluginManagement>
       <plugins>
-    
-    <!-- So m2e doesn't throw errors for features it doesn't support in the 
-        POM -->
+
+        <!-- So m2e doesn't throw errors for features it doesn't support in the POM -->
         <plugin>
           <groupId>org.eclipse.m2e</groupId>
           <artifactId>lifecycle-mapping</artifactId>
@@ -186,16 +191,16 @@
                     </goals>
                   </pluginExecutionFilter>
                   <action>
-                    <execute />
+                    <execute/>
                   </action>
                 </pluginExecution>
               </pluginExecutions>
             </lifecycleMappingMetadata>
           </configuration>
         </plugin>
-        
+
       </plugins>
     </pluginManagement>
-   </build>
+  </build>
 
 </project>
