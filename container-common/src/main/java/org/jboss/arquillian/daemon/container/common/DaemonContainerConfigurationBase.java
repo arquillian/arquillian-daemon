@@ -26,50 +26,30 @@ public class DaemonContainerConfigurationBase implements ContainerConfiguration 
 
     // Properties
     private String host;
-    private String port;
+    private Integer port;
 
-    /**
-     * {@inheritDoc}
-     *
-     * @see org.jboss.arquillian.container.spi.client.container.ContainerConfiguration#validate()
-     */
     @Override
     public void validate() throws ConfigurationException {
         if (host == null || host.length() == 0) {
             throw new ConfigurationException("host must be specified");
         }
-        if (port == null || port.length() == 0) {
-            throw new ConfigurationException("port must be specified");
+        if (port == null || port < 1 || port > 65536) {
+            throw new ConfigurationException("port must be specified within the range of [1-65563]");
         }
     }
-
-    /**
-     * @return the host
-     */
     public String getHost() {
         return host;
     }
 
-    /**
-     * @param host
-     *            the host to set
-     */
     public void setHost(String host) {
         this.host = host;
     }
 
-    /**
-     * @return the port
-     */
-    public String getPort() {
+    public Integer getPort() {
         return port;
     }
 
-    /**
-     * @param port
-     *            the port to set
-     */
-    public void setPort(String port) {
+    public void setPort(Integer port) {
         this.port = port;
     }
 

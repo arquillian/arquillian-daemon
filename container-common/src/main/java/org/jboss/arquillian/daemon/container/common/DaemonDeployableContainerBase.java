@@ -63,8 +63,8 @@ public abstract class DaemonDeployableContainerBase<CONFIGTYPE extends DaemonCon
     @Override
     public void setup(final CONFIGTYPE configuration) {
         final String remoteHost = configuration.getHost();
-        final String remotePort = configuration.getPort();
-        final InetSocketAddress address = new InetSocketAddress(remoteHost, Integer.parseInt(remotePort));
+        final Integer remotePort = configuration.getPort();
+        final InetSocketAddress address = new InetSocketAddress(remoteHost, remotePort);
         this.remoteAddress = address;
     }
 
@@ -76,7 +76,7 @@ public abstract class DaemonDeployableContainerBase<CONFIGTYPE extends DaemonCon
             final long startTime = System.currentTimeMillis();
             final int secondsToWait = 10;
             final long acceptableTime = startTime + 1000 * secondsToWait; // 10 seconds from now
-            Socket socket = null;
+            Socket socket;
             while (true) {
                 try {
                     // TODO Security Action
