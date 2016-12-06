@@ -25,8 +25,6 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.ProcessBuilder.Redirect;
 import java.net.InetSocketAddress;
-import java.security.AccessController;
-import java.security.PrivilegedAction;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -43,11 +41,14 @@ public class ManagedDaemonDeployableContainer extends
     DeployableContainer<ManagedDaemonContainerConfiguration> {
 
     private static final Logger log = Logger.getLogger(ManagedDaemonDeployableContainer.class.getName());
-    private static final String SYSPROP_KEY_JAVA_HOME = "java.home";
 
     private Thread shutdownHookThread;
-    private File serverjarFile;
     private Process remoteProcess;
+    private File serverJar;
+    private String javaHomeLocation;
+    private boolean debug;
+    private int debugPort;
+    private boolean suspend;
 
     /**
      * {@inheritDoc}
@@ -67,7 +68,11 @@ public class ManagedDaemonDeployableContainer extends
     @Override
     public void setup(final ManagedDaemonContainerConfiguration configuration) {
         super.setup(configuration);
-        serverjarFile = new File(configuration.getServerJarFile());
+        this.serverJar = new File(configuration.getServerJarFile());
+        this.javaHomeLocation = configuration.getJavaHome();
+        this.debug = configuration.isDebug();
+        this.debugPort = configuration.getDebugPort();
+        this.suspend = configuration.isSuspend();
     }
 
     /**
@@ -77,19 +82,7 @@ public class ManagedDaemonDeployableContainer extends
      */
     @Override
     public void start() throws LifecycleException {
-
-        // Build the launch command
-        final File javaHome = new File(SecurityActions.getSystemProperty(SYSPROP_KEY_JAVA_HOME));
-        final List<String> command = new ArrayList<>(10);
-        command.add(javaHome.getAbsolutePath() + "/bin/java");
-        command.add("-jar");
-        command.add(serverjarFile.getAbsolutePath());
-        final InetSocketAddress remoteAddress = this.getRemoteAddress();
-        command.add(remoteAddress.getHostString());
-        command.add(Integer.toString(remoteAddress.getPort()));
-
-        // Launch the process
-        final ProcessBuilder processBuilder = new ProcessBuilder(command);
+        final ProcessBuilder processBuilder = new ProcessBuilder(buildCommand());
         processBuilder.redirectErrorStream(true);
         processBuilder.redirectOutput(Redirect.INHERIT);
         final Process process;
@@ -165,22 +158,20 @@ public class ManagedDaemonDeployableContainer extends
         remoteProcess = null;
     }
 
-    private static final class SecurityActions {
-        private SecurityActions() {
-            throw new UnsupportedOperationException("No instance permitted");
-        }
+    protected List<String> buildCommand() {
+        final File javaHome = new File(javaHomeLocation);
+        final List<String> command = new ArrayList<>(10);
 
-        static String getSystemProperty(final String key) {
-            assert key != null && key.length() > 0 : "key must be specified";
-            if (System.getSecurityManager() == null) {
-                return System.getProperty(key);
-            }
-            return AccessController.doPrivileged(new PrivilegedAction<String>() {
-                @Override
-                public String run() {
-                    return System.getProperty(key);
-                }
-            });
+        command.add(javaHome.getAbsolutePath() + "/bin/java");
+        if (this.debug) {
+            command.add(String.format("-agentlib:jdwp=transport=dt_socket,address=%d,server=y,suspend=%s", this.debugPort, (this.suspend ? "y" : "n")));
         }
+        command.add("-jar");
+        command.add(serverJar.getAbsolutePath());
+        final InetSocketAddress remoteAddress = this.getRemoteAddress();
+        command.add(remoteAddress.getHostString());
+        command.add(Integer.toString(remoteAddress.getPort()));
+        return command;
     }
+
 }
