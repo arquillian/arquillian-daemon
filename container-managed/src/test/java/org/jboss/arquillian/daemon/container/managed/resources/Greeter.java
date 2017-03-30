@@ -28,10 +28,8 @@ public class Greeter {
     /**
      * Greets the user by prepending {@link Greeter#PREFIX} to the required, supplied name
      *
-     * @param name
-     * @return
      * @throws IllegalArgumentException
-     *             If the name is not specified
+     *     If the name is not specified
      */
     public static String greet(final String name) throws IllegalArgumentException {
         if (name == null || name.length() == 0) {

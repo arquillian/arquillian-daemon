@@ -34,7 +34,7 @@ final class SecurityActions {
     }
 
     static String getSystemProperty(final String sysPropName) {
-        assert sysPropName != null && sysPropName.length() > 0 : "System property name must be specified";
+        assert sysPropName !=null && sysPropName.length() > 0 :"System property name must be specified";
         if (System.getSecurityManager() == null) {
             return System.getProperty(sysPropName);
         } else {

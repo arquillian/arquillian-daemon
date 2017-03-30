@@ -31,34 +31,34 @@ import org.jboss.shrinkwrap.api.spec.JavaArchive;
  *
  * @author <a href="mailto:alr@jboss.org">Andrew Lee Rubinger</a>
  */
-public enum DaemonDeploymentPackager implements DeploymentPackager {
+public enum DaemonDeploymentPackager implements DeploymentPackager{
 
     INSTANCE;
 
-    private static final Logger log = Logger.getLogger(DaemonDeploymentPackager.class.getName());
+private static final Logger log=Logger.getLogger(DaemonDeploymentPackager.class.getName());
 
-    /**
-     * {@inheritDoc}
-     *
-     * @see org.jboss.arquillian.container.test.spi.client.deployment.DeploymentPackager#generateDeployment(org.jboss.arquillian
-     *      .container.test.spi.TestDeployment, java.util.Collection)
-     */
-    @Override
-    public Archive<?> generateDeployment(final TestDeployment testDeployment,
-        final Collection<ProtocolArchiveProcessor> processors) {
-        // Merge auxiliary archives with the declared for ARQ and testrunner support
-        final JavaArchive archive = testDeployment.getApplicationArchive().as(JavaArchive.class);
-        if (log.isLoggable(Level.FINEST)) {
-            log.finest("Archive before additional packaging: " + archive.toString(true));
-        }
-        for (final Archive<?> auxArchive : testDeployment.getAuxiliaryArchives()) {
-            archive.merge(auxArchive);
-        }
-        if (log.isLoggable(Level.FINEST)) {
-            log.finest("Archive after additional packaging: " + archive.toString(true));
-        }
+/**
+ * {@inheritDoc}
+ *
+ * @see org.jboss.arquillian.container.test.spi.client.deployment.DeploymentPackager#generateDeployment(org.jboss.arquillian
+ * .container.test.spi.TestDeployment, java.util.Collection)
+ */
+@Override
+public Archive<?> generateDeployment(final TestDeployment testDeployment,
+final Collection<ProtocolArchiveProcessor> processors){
+// Merge auxiliary archives with the declared for ARQ and testrunner support
+final JavaArchive archive=testDeployment.getApplicationArchive().as(JavaArchive.class);
+    if(log.isLoggable(Level.FINEST)){
+    log.finest("Archive before additional packaging: "+archive.toString(true));
+    }
+    for(final Archive<?> auxArchive:testDeployment.getAuxiliaryArchives()){
+    archive.merge(auxArchive);
+    }
+    if(log.isLoggable(Level.FINEST)){
+    log.finest("Archive after additional packaging: "+archive.toString(true));
+    }
 
-        return archive;
+    return archive;
 
     }
-}
+    }

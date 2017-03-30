@@ -43,10 +43,9 @@ import java.util.jar.JarFile;
  *
  * @author <a href="mailto:alr@jboss.org">Andrew Lee Rubinger</a>
  * @deprecated In place until we can work out proper support for this either in jboss-modules or via a new jboss-modules
- *             API which lets us load from a JAR
+ * API which lets us load from a JAR
  */
-@Deprecated
-final class HackJarModuleLoader extends ModuleLoader {
+@Deprecated final class HackJarModuleLoader extends ModuleLoader {
 
     private static final String SYSPROP_NAME_TMP_DIR = "java.io.tmpdir";
     private static final String PREFIX_MODULES_DIR = "modules-";
@@ -65,10 +64,8 @@ final class HackJarModuleLoader extends ModuleLoader {
      * Creates a new {@link ModuleLoader} instance for the specified JAR file, where modules are located in a root
      * denoted by the specified <code>moduleRoot</code> parameter (which is relative to the root of the JAR).
      *
-     * @param jar
-     * @param moduleRoot
      * @throws IllegalArgumentException
-     *             If either argument is not specified
+     *     If either argument is not specified
      */
     public HackJarModuleLoader(final JarFile jar, final String moduleRoot) throws IllegalArgumentException {
 
@@ -145,9 +142,8 @@ final class HackJarModuleLoader extends ModuleLoader {
         }
 
         // Set
-        this.delegate = new LocalModuleLoader(new File[] { modulesDir });
+        this.delegate = new LocalModuleLoader(new File[] {modulesDir});
         this.localModulesLocation = modulesDir;
-
     }
 
     /**
@@ -157,7 +153,7 @@ final class HackJarModuleLoader extends ModuleLoader {
      */
     @Override
     protected Module preloadModule(final ModuleIdentifier identifier) throws ModuleLoadException {
-        assert identifier != null;
+        assert identifier !=null;
         return ModuleLoader.preloadModule(identifier, delegate);
     }
 
@@ -200,5 +196,4 @@ final class HackJarModuleLoader extends ModuleLoader {
             registerRecursiveDeleteOnExit(parent, root);
         }
     }
-
 }

@@ -18,7 +18,7 @@ package org.jboss.arquillian.daemon.protocol.wire;
 
 /**
  * Defines the wire protocol for the Arquillian Server Daemon.
- *
+ * <p>
  * To stop: <code>CMD stop<<EOF</code> To deploy: <code>DPL ${zip-formatted contents}<<EOF</code> To undeploy:
  * <code>CMD undeploy ${deploymentName}<<EOF</code> To execute tests:
  * <code>CMD test ${deploymentName} ${FQN test class} ${methodName}<<EOF</code>
@@ -59,5 +59,4 @@ public interface WireProtocol {
 
     String RESPONSE_OK_PREFIX = "OK ";
     String RESPONSE_ERROR_PREFIX = "ERR ";
-
 }

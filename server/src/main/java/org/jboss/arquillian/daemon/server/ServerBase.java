@@ -64,12 +64,10 @@ public abstract class ServerBase implements Server {
 
     /**
      * Creates a new instance, to be bound on start at the specified, required {@link InetSocketAddress}
-     *
-     * @param bindAddress
      */
     public ServerBase(final InetSocketAddress bindAddress) {
         // Precondition checks
-        assert bindAddress != null : "Bind address must be specified";
+        assert bindAddress !=null :"Bind address must be specified";
 
         // Determine the ClassLoader to use in creating the SW Domain
         final ClassLoader thisCl = NettyServer.class.getClassLoader();
@@ -127,7 +125,6 @@ public abstract class ServerBase implements Server {
         if (log.isLoggable(Level.INFO)) {
             log.info("Server started on " + boundAddress.getHostName() + ":" + boundAddress.getPort());
         }
-
     }
 
     /**
@@ -147,7 +144,6 @@ public abstract class ServerBase implements Server {
             @Override
             public void publish(final LogRecord record) {
                 System.out.println(PREFIX + record.getMessage());
-
             }
 
             @Override
@@ -191,8 +187,6 @@ public abstract class ServerBase implements Server {
 
     /**
      * The address configured to which we should bind
-     *
-     * @return
      */
     protected final InetSocketAddress getBindAddress() {
         return this.bindAddress;
@@ -213,7 +207,7 @@ public abstract class ServerBase implements Server {
 
     /**
      * @param boundAddress
-     *            the boundAddress to set
+     *     the boundAddress to set
      */
     protected final void setBoundAddress(final InetSocketAddress boundAddress) {
         this.boundAddress = boundAddress;
@@ -238,10 +232,6 @@ public abstract class ServerBase implements Server {
      * an isolated ClassLoader containing only the archive's contents and the bootstrap {@link ClassLoader}. Note that
      * the system --classpath {@link ClassLoader} will not be visible to the test.
      *
-     * @param archiveId
-     * @param testClassName
-     * @param methodName
-     * @return
      * @throws IllegalStateException
      */
     protected final Serializable executeTest(final String archiveId, final String testClassName, final String methodName)
@@ -324,13 +314,15 @@ public abstract class ServerBase implements Server {
             throw new UnsupportedOperationException("No instances");
         }
 
-        private enum GetTcclAction implements PrivilegedAction<ClassLoader> {
+        private enum GetTcclAction implements PrivilegedAction<ClassLoader>
+
+        {
             INSTANCE;
 
             @Override
-            public ClassLoader run() {
-                return Thread.currentThread().getContextClassLoader();
-            }
+            public ClassLoader run () {
+            return Thread.currentThread().getContextClassLoader();
+        }
         }
 
         static ClassLoader getTccl() {
@@ -341,7 +333,7 @@ public abstract class ServerBase implements Server {
         }
 
         static void setTccl(final ClassLoader cl) {
-            assert cl != null : "ClassLoader must be specified";
+            assert cl !=null :"ClassLoader must be specified";
             if (System.getSecurityManager() == null) {
                 Thread.currentThread().setContextClassLoader(cl);
             }

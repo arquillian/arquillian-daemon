@@ -38,13 +38,13 @@ import java.util.logging.Logger;
 
 /**
  * Standalone process entry point for the Arquillian Server Daemon. Accepts two (optional) arguments:
- *
+ * <p>
  * <ol>
  * <li>hostname - The name which the server should bind to. If left unspecified, the server will bind to the wildcard
  * address.</li>
  * <li>port - An integer between 0 and {@link Servers#MAX_PORT}; if unspecified or 0 the system will choose a port.</li>
  * </ol>
- *
+ * <p>
  * These arguments may be specified as system properties {@link Main#SYSPROP_NAME_BIND_NAME} and
  * {@link Main#SYSPROP_NAME_BIND_PORT}, which will take precedence over command-line arguments.
  *
@@ -60,8 +60,6 @@ public class Main {
 
     /**
      * Entry point; arguments as documented at the class level
-     *
-     * @param args
      */
     public static void main(final String[] args) {
 
@@ -183,9 +181,9 @@ public class Main {
 
     private static Method getMethod(final Class<?> clazz, final String methodName, final Class<?>[] paramTypes)
         throws SecurityException {
-        assert clazz != null;
-        assert methodName != null && methodName.length() > 0;
-        assert paramTypes != null;
+        assert clazz !=null;
+        assert methodName !=null && methodName.length() > 0;
+        assert paramTypes !=null;
         try {
             if (System.getSecurityManager() == null) {
                 return clazz.getMethod(methodName, paramTypes);
@@ -221,5 +219,4 @@ public class Main {
             });
         }
     }
-
 }

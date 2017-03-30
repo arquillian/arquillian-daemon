@@ -46,5 +46,4 @@ public class ReflectionContractTest {
         final Method method = Servers.class.getMethod(Servers.METHOD_NAME_CREATE, Servers.METHOD_PARAMS_CREATE);
         assertNotNull(method);
     }
-
 }

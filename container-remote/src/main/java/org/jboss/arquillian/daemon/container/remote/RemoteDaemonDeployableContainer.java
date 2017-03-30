@@ -36,5 +36,4 @@ public class RemoteDaemonDeployableContainer extends DaemonDeployableContainerBa
     public Class<RemoteDaemonContainerConfiguration> getConfigurationClass() {
         return RemoteDaemonContainerConfiguration.class;
     }
-
 }

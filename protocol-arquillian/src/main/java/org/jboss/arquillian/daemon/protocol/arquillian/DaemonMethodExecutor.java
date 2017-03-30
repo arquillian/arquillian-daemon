@@ -56,7 +56,7 @@ public class DaemonMethodExecutor implements ContainerMethodExecutor {
     @Override
     public TestResult invoke(final TestMethodExecutor testMethodExecutor) {
 
-        assert testMethodExecutor != null : "Test method executor is required";
+        assert testMethodExecutor !=null :"Test method executor is required";
 
         // Build the String request according to the wire protocol
         final String testCommand = createTestCommand(testMethodExecutor);
@@ -73,7 +73,6 @@ public class DaemonMethodExecutor implements ContainerMethodExecutor {
             final TestResult testResult = (TestResult) response.readObject();
             response.close();
             return testResult;
-
         } catch (final IOException ioe) {
             throw new RuntimeException("Could not get test results", ioe);
         } catch (final ClassNotFoundException cnfe) {
@@ -83,12 +82,12 @@ public class DaemonMethodExecutor implements ContainerMethodExecutor {
 
     private String createTestCommand(TestMethodExecutor testMethodExecutor) {
         return WireProtocol.COMMAND_TEST_PREFIX +
-                context.getName() +
-                SPACE +
-                testMethodExecutor.getInstance().getClass().getName() +
-                SPACE +
-                testMethodExecutor.getMethod().getName() +
-                WireProtocol.COMMAND_EOF_DELIMITER;
+            context.getName() +
+            SPACE +
+            testMethodExecutor.getInstance().getClass().getName() +
+            SPACE +
+            testMethodExecutor.getMethod().getName() +
+            WireProtocol.COMMAND_EOF_DELIMITER;
     }
 
     /**
@@ -101,7 +100,7 @@ public class DaemonMethodExecutor implements ContainerMethodExecutor {
         private final InputStream delegate;
 
         NoCloseInputStream(final InputStream delegate) {
-            assert delegate != null : "delegate must be specified";
+            assert delegate !=null :"delegate must be specified";
             this.delegate = delegate;
         }
 
@@ -116,7 +115,6 @@ public class DaemonMethodExecutor implements ContainerMethodExecutor {
         }
 
         /**
-         * @return
          * @throws IOException
          * @see java.io.InputStream#read()
          */
@@ -126,7 +124,6 @@ public class DaemonMethodExecutor implements ContainerMethodExecutor {
         }
 
         /**
-         * @return
          * @see java.lang.Object#hashCode()
          */
         @Override
@@ -135,8 +132,6 @@ public class DaemonMethodExecutor implements ContainerMethodExecutor {
         }
 
         /**
-         * @param b
-         * @return
          * @throws IOException
          * @see java.io.InputStream#read(byte[])
          */
@@ -146,8 +141,6 @@ public class DaemonMethodExecutor implements ContainerMethodExecutor {
         }
 
         /**
-         * @param obj
-         * @return
          * @see java.lang.Object#equals(java.lang.Object)
          */
         @Override
@@ -156,10 +149,6 @@ public class DaemonMethodExecutor implements ContainerMethodExecutor {
         }
 
         /**
-         * @param b
-         * @param off
-         * @param len
-         * @return
          * @throws IOException
          * @see java.io.InputStream#read(byte[], int, int)
          */
@@ -169,8 +158,6 @@ public class DaemonMethodExecutor implements ContainerMethodExecutor {
         }
 
         /**
-         * @param n
-         * @return
          * @throws IOException
          * @see java.io.InputStream#skip(long)
          */
@@ -180,7 +167,6 @@ public class DaemonMethodExecutor implements ContainerMethodExecutor {
         }
 
         /**
-         * @return
          * @see java.lang.Object#toString()
          */
         @Override
@@ -189,7 +175,6 @@ public class DaemonMethodExecutor implements ContainerMethodExecutor {
         }
 
         /**
-         * @return
          * @throws IOException
          * @see java.io.InputStream#available()
          */
@@ -199,7 +184,6 @@ public class DaemonMethodExecutor implements ContainerMethodExecutor {
         }
 
         /**
-         * @param readlimit
          * @see java.io.InputStream#mark(int)
          */
         @Override
@@ -217,14 +201,11 @@ public class DaemonMethodExecutor implements ContainerMethodExecutor {
         }
 
         /**
-         * @return
          * @see java.io.InputStream#markSupported()
          */
         @Override
         public boolean markSupported() {
             return delegate.markSupported();
         }
-
     }
-
 }

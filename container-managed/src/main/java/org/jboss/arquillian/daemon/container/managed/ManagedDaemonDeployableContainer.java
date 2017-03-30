@@ -144,7 +144,6 @@ public class ManagedDaemonDeployableContainer extends
             }
 
             log.info("Response from stop: " + response);
-
         } catch (final IOException ioe) {
             throw new LifecycleException(
                 "Unexpected problem encountered during read of the response from stop request", ioe);
@@ -171,7 +170,7 @@ public class ManagedDaemonDeployableContainer extends
         }
 
         static String getSystemProperty(final String key) {
-            assert key != null && key.length() > 0 : "key must be specified";
+            assert key !=null && key.length() > 0 :"key must be specified";
             if (System.getSecurityManager() == null) {
                 return System.getProperty(key);
             }

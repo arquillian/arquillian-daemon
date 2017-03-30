@@ -40,7 +40,7 @@ public interface Server {
      *
      * @throws ServerLifecycleException
      * @throws IllegalStateException
-     *             If the server is already running
+     *     If the server is already running
      */
     void start() throws ServerLifecycleException, IllegalStateException;
 
@@ -49,24 +49,20 @@ public interface Server {
      *
      * @throws ServerLifecycleException
      * @throws IllegalStateException
-     *             If the server is not running
+     *     If the server is not running
      */
     void stop() throws ServerLifecycleException, IllegalStateException;
 
     /**
      * Returns whether or not the server is running
-     *
-     * @return
      */
     boolean isRunning();
 
     /**
      * Obtains the address to which the current running server is bound
      *
-     * @return
      * @throws IllegalStateException
-     *             If {@link Server#isRunning()} is <code>false</code>
+     *     If {@link Server#isRunning()} is <code>false</code>
      */
     InetSocketAddress getBoundAddress() throws IllegalStateException;
-
 }

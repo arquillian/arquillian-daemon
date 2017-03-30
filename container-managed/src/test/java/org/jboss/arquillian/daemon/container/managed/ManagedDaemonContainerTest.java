@@ -49,5 +49,4 @@ public class ManagedDaemonContainerTest {
     public void requiresName() {
         Greeter.greet(null);
     }
-
 }

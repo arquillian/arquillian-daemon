@@ -36,5 +36,4 @@ public class DaemonContainerExtensionBase implements LoadableExtension {
     public void register(final ExtensionBuilder builder) {
         builder.service(Protocol.class, DaemonProtocol.class);
     }
-
 }

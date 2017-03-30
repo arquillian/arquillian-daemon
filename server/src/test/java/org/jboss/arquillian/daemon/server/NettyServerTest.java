@@ -158,7 +158,6 @@ public class NettyServerTest {
             // Stop
             server.stop();
         }
-
     }
 
     @Test
@@ -197,7 +196,6 @@ public class NettyServerTest {
                 Thread.sleep(300);
             }
             Assert.fail("Server did not shut down via wire protocol request in the alloted time");
-
         } finally {
             if (socket != null) {
                 try {
@@ -217,6 +215,5 @@ public class NettyServerTest {
                 server.stop();
             }
         }
-
     }
 }

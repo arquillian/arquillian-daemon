@@ -51,14 +51,10 @@ public class DeploymentContext extends NamedContext {
      * Creates and returns a new {@link DeploymentContext} instance from the required arguments
      *
      * @param deploymentName
-     *            Name of the deployment
-     * @param socketInstream
-     * @param socketOutstream
-     * @param reader
-     * @param writer
-     * @return
+     *     Name of the deployment
+     *
      * @throws IllegalArgumentException
-     *             If any argument is not specified
+     *     If any argument is not specified
      */
     public static DeploymentContext create(final String deploymentName, final InputStream socketInstream,
         final OutputStream socketOutstream, final BufferedReader reader, final PrintWriter writer)
@@ -109,5 +105,4 @@ public class DeploymentContext extends NamedContext {
     public PrintWriter getWriter() {
         return writer;
     }
-
 }

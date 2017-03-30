@@ -49,5 +49,4 @@ public class RemoteDaemonContainerTest {
     public void requiresName() {
         Greeter.greet(null);
     }
-
 }

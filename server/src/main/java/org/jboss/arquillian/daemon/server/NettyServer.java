@@ -61,6 +61,7 @@ final class NettyServer extends ServerBase implements Server {
 
     private static final Logger log = Logger.getLogger(NettyServer.class.getName());
     private static final EofDecoder EOF_DECODER;
+
     static {
         try {
             EOF_DECODER = new EofDecoder();
@@ -68,15 +69,16 @@ final class NettyServer extends ServerBase implements Server {
             throw new RuntimeException("Could not get encoding: " + WireProtocol.CHARSET, e);
         }
     }
+
     private static final String NAME_CHANNEL_HANDLER_EOF = "EOFHandler";
     private static final String NAME_CHANNEL_HANDLER_ACTION_CONTROLLER = "ActionControllerHandler";
     private static final String NAME_CHANNEL_HANDLER_STRING_DECODER = "StringDecoder";
     private static final String NAME_CHANNEL_HANDLER_FRAME_DECODER = "FrameDecoder";
     private static final String NAME_CHANNEL_HANDLER_DEPLOY_HANDLER = "DeployHandler";
     private static final String NAME_CHANNEL_HANDLER_COMMAND = "CommandHandler";
-    private static final String[] NAME_CHANNEL_HANDLERS = { NAME_CHANNEL_HANDLER_EOF,
+    private static final String[] NAME_CHANNEL_HANDLERS = {NAME_CHANNEL_HANDLER_EOF,
         NAME_CHANNEL_HANDLER_ACTION_CONTROLLER, NAME_CHANNEL_HANDLER_STRING_DECODER,
-        NAME_CHANNEL_HANDLER_FRAME_DECODER, NAME_CHANNEL_HANDLER_DEPLOY_HANDLER, NAME_CHANNEL_HANDLER_COMMAND };
+        NAME_CHANNEL_HANDLER_FRAME_DECODER, NAME_CHANNEL_HANDLER_DEPLOY_HANDLER, NAME_CHANNEL_HANDLER_COMMAND};
 
     private ServerBootstrap bootstrap;
 
@@ -142,7 +144,7 @@ final class NettyServer extends ServerBase implements Server {
          * {@inheritDoc}
          *
          * @see io.netty.channel.ChannelInboundMessageHandlerAdapter#messageReceived(io.netty.channel.ChannelHandlerContext,
-         *      java.lang.Object)
+         * java.lang.Object)
          */
         @Override
         public void messageReceived(final ChannelHandlerContext ctx, final String message) throws Exception {
@@ -231,14 +233,12 @@ final class NettyServer extends ServerBase implements Server {
                 else {
                     throw new UnsupportedOperationException("This server does not support command: " + message);
                 }
-
             } catch (final Throwable t) {
                 // Will be captured by any remote process which launched us and is piping in our output
                 t.printStackTrace();
                 NettyServer.sendResponse(ctx, out, WireProtocol.RESPONSE_ERROR_PREFIX
                     + "Caught unexpected error servicing request: " + t.getMessage());
             }
-
         }
 
         /**
@@ -246,7 +246,7 @@ final class NettyServer extends ServerBase implements Server {
          * implementation.
          *
          * @see io.netty.channel.ChannelStateHandlerAdapter#exceptionCaught(io.netty.channel.ChannelHandlerContext,
-         *      java.lang.Throwable)
+         * java.lang.Throwable)
          */
         @Override
         public void exceptionCaught(final ChannelHandlerContext ctx, final Throwable cause) throws Exception {
@@ -261,7 +261,6 @@ final class NettyServer extends ServerBase implements Server {
                 super.exceptionCaught(ctx, cause);
             }
         }
-
     }
 
     /**
@@ -369,7 +368,7 @@ final class NettyServer extends ServerBase implements Server {
          * Returns to the client that some error was encountered
          *
          * @see io.netty.channel.ChannelStateHandlerAdapter#exceptionCaught(io.netty.channel.ChannelHandlerContext,
-         *      java.lang.Throwable)
+         * java.lang.Throwable)
          */
         @Override
         public void exceptionCaught(final ChannelHandlerContext ctx, final Throwable cause) throws Exception {
@@ -378,11 +377,6 @@ final class NettyServer extends ServerBase implements Server {
 
         /**
          * Determines whether we have a {@link String}-based command
-         *
-         * @param magic1
-         * @param magic2
-         * @param magic3
-         * @return
          */
         private boolean isStringCommand(final int magic1, final int magic2, final int magic3) {
             // First the bytes matches command prefix?
@@ -393,18 +387,12 @@ final class NettyServer extends ServerBase implements Server {
 
         /**
          * Determines whether we have a deployment command
-         *
-         * @param magic1
-         * @param magic2
-         * @param magic3
-         * @return
          */
         private boolean isDeployCommand(final int magic1, final int magic2, final int magic3) {
             return magic1 == WireProtocol.COMMAND_DEPLOY_PREFIX.charAt(0)
                 && magic2 == WireProtocol.COMMAND_DEPLOY_PREFIX.charAt(1)
                 && magic3 == WireProtocol.COMMAND_DEPLOY_PREFIX.charAt(2);
         }
-
     }
 
     /**
@@ -444,5 +432,4 @@ final class NettyServer extends ServerBase implements Server {
         }
         ctx.flush();
     }
-
 }

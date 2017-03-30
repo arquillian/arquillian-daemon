@@ -52,7 +52,7 @@ public class DaemonContainerConfigurationBase implements ContainerConfiguration 
 
     /**
      * @param host
-     *            the host to set
+     *     the host to set
      */
     public void setHost(String host) {
         this.host = host;
@@ -67,10 +67,9 @@ public class DaemonContainerConfigurationBase implements ContainerConfiguration 
 
     /**
      * @param port
-     *            the port to set
+     *     the port to set
      */
     public void setPort(String port) {
         this.port = port;
     }
-
 }

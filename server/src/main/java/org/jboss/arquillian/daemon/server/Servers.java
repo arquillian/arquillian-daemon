@@ -30,7 +30,7 @@ public final class Servers {
     // These exposed as part of the API to help callers using reflection (for instance to avoid CCE if accessing the
     // server from a different ClassLoader)
     public static final String METHOD_NAME_CREATE = "create";
-    public static final Class<?>[] METHOD_PARAMS_CREATE = new Class<?>[] { String.class, int.class };
+    public static final Class<?>[] METHOD_PARAMS_CREATE = new Class<?>[] {String.class, int.class};
 
     /**
      * No instances
@@ -44,9 +44,6 @@ public final class Servers {
      * specified, the server will bind on all available addresses. The port value must be between 0 and
      * {@link Servers#MAX_PORT}; if a value of 0 is selected, the system will choose a port.
      *
-     * @param bindAddress
-     * @param bindPort
-     * @return
      * @throws IllegalArgumentException
      */
     public static Server create(final String bindAddress, final int bindPort) throws IllegalArgumentException {

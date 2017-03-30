@@ -1,9 +1,9 @@
 <module xmlns="urn:jboss:module:1.1" name="io.netty">
-    <resources>
-        <resource-root path="netty.jar" />
-    </resources>
+  <resources>
+    <resource-root path="netty.jar"/>
+  </resources>
 
-    <dependencies>
-       
-    </dependencies>
+  <dependencies>
+
+  </dependencies>
 </module>

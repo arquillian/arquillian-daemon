@@ -59,10 +59,9 @@ public class ManagedDaemonContainerConfiguration extends DaemonContainerConfigur
 
     /**
      * @param serverJarFile
-     *            the serverJarFile to set
+     *     the serverJarFile to set
      */
     public void setServerJarFile(final String serverJarFile) {
         this.serverJarFile = serverJarFile;
     }
-
 }

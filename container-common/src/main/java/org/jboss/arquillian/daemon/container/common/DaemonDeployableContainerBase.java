@@ -105,7 +105,7 @@ public abstract class DaemonDeployableContainerBase<CONFIGTYPE extends DaemonCon
                     }
                 }
             }
-            assert socket != null : "Socket should have been connected";
+            assert socket !=null :"Socket should have been connected";
             this.socket = socket;
             this.socketOutstream = socket.getOutputStream();
             this.writer = new PrintWriter(new OutputStreamWriter(this.socketOutstream, WireProtocol.CHARSET),
@@ -116,7 +116,6 @@ public abstract class DaemonDeployableContainerBase<CONFIGTYPE extends DaemonCon
             this.closeRemoteResources();
             throw new LifecycleException("Could not open connection to remote process", ioe);
         }
-
     }
 
     /**
@@ -178,7 +177,6 @@ public abstract class DaemonDeployableContainerBase<CONFIGTYPE extends DaemonCon
                 log.finer("Got deployment: " + deploymentId);
             }
             this.currentDeploymentId = deploymentId;
-
         } catch (final IOException ioe) {
             this.closeRemoteResources();
             throw new DeploymentException("I/O problem encountered during deployment", ioe);
@@ -202,7 +200,7 @@ public abstract class DaemonDeployableContainerBase<CONFIGTYPE extends DaemonCon
      */
     @Override
     public final void undeploy(final Archive<?> archive) throws DeploymentException {
-        assert currentDeploymentId != null : "Deployment name should be set";
+        assert currentDeploymentId !=null :"Deployment name should be set";
 
         try {
             // Write the undeploy command prefix and flush it
@@ -226,7 +224,6 @@ public abstract class DaemonDeployableContainerBase<CONFIGTYPE extends DaemonCon
 
             // Clear the name of the current deployment
             this.currentDeploymentId = null;
-
         } catch (final IOException ioe) {
             this.closeRemoteResources();
             throw new DeploymentException("I/O problem encountered during undeployment", ioe);
@@ -252,7 +249,6 @@ public abstract class DaemonDeployableContainerBase<CONFIGTYPE extends DaemonCon
     @Override
     public void undeploy(final Descriptor descriptor) throws DeploymentException {
         throw new UnsupportedOperationException(ERROR_MESSAGE_DESCRIPTORS_UNSUPPORTED);
-
     }
 
     /**
@@ -313,5 +309,4 @@ public abstract class DaemonDeployableContainerBase<CONFIGTYPE extends DaemonCon
             socket = null;
         }
     }
-
 }
