@@ -35,7 +35,7 @@
   <properties>
     <version.org.jboss.arquillian.core>1.1.10.Final</version.org.jboss.arquillian.core>
     <version.junit_junit>4.12</version.junit_junit>
-    <version.org.apache.maven.plugins_maven-site-plugin>3.6</version.org.apache.maven.plugins_maven-site-plugin>
+    <version.org.apache.maven.plugins_maven-site-plugin>3.7.1</version.org.apache.maven.plugins_maven-site-plugin>
   </properties>
 
   <scm>
