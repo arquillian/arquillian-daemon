@@ -33,7 +33,7 @@
   </modules>
 
   <properties>
-    <version.org.jboss.arquillian.core>1.1.10.Final</version.org.jboss.arquillian.core>
+    <version.org.jboss.arquillian.core>1.4.1.Final</version.org.jboss.arquillian.core>
     <version.junit_junit>4.12</version.junit_junit>
     <version.org.apache.maven.plugins_maven-site-plugin>3.6</version.org.apache.maven.plugins_maven-site-plugin>
   </properties>
